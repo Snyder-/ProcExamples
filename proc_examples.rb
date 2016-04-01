@@ -28,12 +28,17 @@ module ProcExamples
 
   # Proc examples
   module CaptureBlock
-    def self.configure
-      yield options if block_given?
-    end
+    # Class that has options that is needs to configure
+    class SomeClass
+      def self.configure
+        options.tap do
+          yield options if block_given?
+        end
+      end
 
-    def self.options
-      @options ||= Options.new
+      def self.options
+        @options ||= Options.new
+      end
     end
   end
 end
